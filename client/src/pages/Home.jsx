@@ -2,8 +2,8 @@ import a from "../assets/360_F_214567514_hGbTMUq06pJIGKiXA248l43E3hU9Q08x.jpg"
 import b from "../assets/images (1).jpg"
 import c from "../assets/images (2).jpg"
 
-
 import "../style/Home.css"
+
 const Home = () => {
     return (
         <div>

@@ -1,4 +1,5 @@
 import Home from './pages/Home';
+import Admin from './pages/Admin';
 import {  
   BrowserRouter as Router,  
   Routes,  
@@ -12,8 +13,7 @@ const App = () => {
     <Router>
       <Routes>
       <Route path = "/" element = {<Home/>}/>
-
-
+      <Route path = "/admin" element = {<Admin/>}/>
       </Routes>
     </Router>
   )
