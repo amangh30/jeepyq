@@ -13,7 +13,7 @@ const In = styled(TextField)`
     `
 const I = styled(Input)`
     width:220px;
-    border:2px solid grey;
+    border:1px solid grey;
     color:black;
     background-color:white;
 `
@@ -25,12 +25,16 @@ const Btn = styled(Button)`
 
 const Admin = ()=>{
     const [file, setFile] = useState(null);
+    const [subject, setSubject] = useState('');
     const [year, setYear] = useState('');
     const [date, setDate] = useState('');
     const [shift, setShift] = useState('');
 
     const [isNotVerified,setisNotVerified] = useState(true);
     const [password,setPassword] = useState('')
+    const handleSubjectChange = (e) => {
+        setSubject(e.target.value);
+    };
     const handleYearChange = (e) => {
         setYear(e.target.value);
     };
@@ -68,17 +72,22 @@ const Admin = ()=>{
     }
     const handleSubmit = async () => {
         const formData = new FormData();
+        formData.append('subject',subject);
         formData.append('year', year);
         formData.append('date', date);
         formData.append('shift', shift);
         formData.append('file', file);
-
+        if(!file ||!year||!shift||!date){
+            alert('Please Fill Everything');
+            return;
+        }
         try {
             await axios.post('http://localhost:8000/add', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
+            setSubject('')
             setYear('')
             setDate('')
             setShift('')
@@ -114,6 +123,7 @@ const Admin = ()=>{
             <div className='adm'>
             <div className='welcome'>Welcome To Admin Panel</div>
             <div className='fl'>
+                <I type="text" value={subject} placeholder='Enter Subject'  onChange={handleSubjectChange} required />
                 <I type="text" value={year} placeholder='Enter Year'  onChange={handleYearChange} required />
                 <I type="date" value={date} placeholder='Enter Date' onChange={handleDateChange} required />
                 <I type="text" value={shift} placeholder='Enter Shift' onChange={handleShiftChange} required/>
