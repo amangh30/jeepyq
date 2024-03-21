@@ -2,9 +2,53 @@ import React, { useEffect,useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import axios from "axios"
+import "react-toastify/dist/ReactToastify.css";
+import {TextField,TextareaAutosize,styled,Button} from "@mui/material"
 import '../style/home.css';
+import Lottie from 'react-lottie';
+import animationData from '../assets/singing-contract.json';
+import { ToastContainer, toast } from "react-toastify";
+
+
+
+
+const Input = styled(TextField)`
+  border-radius:22px;
+`
 
 const Home = () => {
+  const [name,setName] = useState(''); 
+  const [email,setEmail] = useState(''); 
+  const [message,setMessage] = useState(''); 
+
+  const handleName=(e)=>{
+    setName(e.target.value);
+  }
+  const handleEmail=(e)=>{
+    setEmail(e.target.value);
+  }
+  const handleMsg=(e)=>{
+    setMessage(e.target.value);
+  }
+
+  const handleMessage = async()=>{
+    const data = {name,email,message}
+    try{
+      const res = axios.post('http://localhost:8000/msg',data)
+      toast.success("Message Sent Successfully")
+    }
+    catch(e){
+      console.log(e)
+    }
+  }
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+  };
   const [selectedOptions, setSelectedOptions] = useState({
     dropdown1: '',
     dropdown2: '',
@@ -93,10 +137,10 @@ const Home = () => {
         value={selectedOptions.dropdown1}
         onChange={(e) => handleDropdownChange('dropdown1', e.target.value)}
       >
-        <option value="">SUBJECT</option>
-        <option value="Physics">PHYSICS</option>
-        <option value="Chemistry">CHEMISTRY</option>
-        <option value="Mathematics">MATHEMATICS</option>
+        <option key="1" value="">SUBJECT</option>
+        <option key="2" value="Physics">PHYSICS</option>
+        <option key="3" value="Chemistry">CHEMISTRY</option>
+        <option key="4" value="Mathematics">MATHEMATICS</option>
       </select>
 
       <select
@@ -130,15 +174,39 @@ const Home = () => {
         value={selectedOptions.dropdown4}
         onChange={(e) => handleDropdownChange('dropdown4', e.target.value)}
       >
-        <option value="">SHIFT</option>
-        <option value="1">SHIFT - 1</option>
-        <option value="2">SHIFT - 2</option>
+        <option key="1" value="">SHIFT</option>
+        <option key="2" value="1">SHIFT - 1</option>
+        <option key="3" value="2">SHIFT - 2</option>
       </select>
     </div>
     <div style={{marginTop:'20px'}}>
-    <button class="extreme-button" onClick={handleFile}>Submit</button>
+    <button className="extreme-button" onClick={handleFile}>Submit</button>
+    </div>
+    <br/>
+    Contact Us
+    <br />
+    <div style={{display:'flex',justifyContent:'space-around'}}>
+      <div className='bggg' style={{ width: '350px',marginTop:'-50px'}}>
+      <Lottie options={defaultOptions} />
+      </div>
+      <div className='bgg'>
+      <Input id="standard-basic" label="Enter Name" value={name} onChange={handleName} type='name'/>
+      <Input id="standard-basic" label="Enter Email" value={email} onChange={handleEmail} type='email'/>
+      <TextareaAutosize style={{height:'15vh'}} id='standard-basic' value={message} onChange={handleMsg} placeholder="Enter Message"/>
+      <Button onClick={handleMessage}>Submit</Button>
+      </div>
+      <footer className="footer">
+      <div className="waves">
+        <div className="wave" id="wave1"></div>
+        <div className="wave" id="wave2"></div>
+        <div className="wave" id="wave3"></div>
+        <div className="wave" id="wave4"></div>
+      </div>
+      <p>&copy;2024 All Rights Reserved</p>
+    </footer>
     </div>
     </motion.div>
+    <ToastContainer/>
     </div>
   );
 };
