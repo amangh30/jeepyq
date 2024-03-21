@@ -34,7 +34,7 @@ const Home = () => {
   const handleMessage = async()=>{
     const data = {name,email,message}
     try{
-      const res = axios.post('http://localhost:8000/msg',data)
+      const res = axios.post('https://colorful-red-turkey.cyclic.app/msg',data)
       toast.success("Message Sent Successfully")
     }
     catch(e){
@@ -61,7 +61,7 @@ const Home = () => {
 
   const runApi =async()=>{
     try{
-      const response= await axios.get("http://localhost:8000/getall")
+      const response= await axios.get("https://colorful-red-turkey.cyclic.app/getall")
       const processedOptions = response.data.map(item => ({
         id: item._id,
         file:item.file,
@@ -109,7 +109,7 @@ const Home = () => {
           if(selectedOptions.dropdown3===option.date){
             if(selectedOptions.dropdown4===option.shift){
               a = option.file;
-              window.open(`http://localhost:8000/getfile/${a}`, '_blank');
+              window.open(`https://colorful-red-turkey.cyclic.app/getfile/${a}`, '_blank');
             }
           }
         }

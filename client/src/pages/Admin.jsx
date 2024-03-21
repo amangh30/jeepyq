@@ -55,7 +55,7 @@ const Admin = ()=>{
     }
     const handleClick=async()=>{
         try{
-            const response  = await axios.post('http://localhost:8000/check', {password:password})
+            const response  = await axios.post('https://colorful-red-turkey.cyclic.app/check', {password:password})
             if(response.data.success){
                 toast.success("Welcome")
                 await new Promise(resolve => setTimeout(resolve, 1000))
@@ -82,7 +82,7 @@ const Admin = ()=>{
             return;
         }
         try {
-            await axios.post('http://localhost:8000/add', formData, {
+            await axios.post('https://colorful-red-turkey.cyclic.app/add', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
