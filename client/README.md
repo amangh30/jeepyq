@@ -19,7 +19,7 @@ Follow these steps to set up your Vite app:
 1. **Clone the repository**:
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/amangh30/jeepyq
    ```
 
 2. **Navigate to the project directory**:
