@@ -25,7 +25,7 @@ Follow these steps to set up your Vite app:
 2. **Navigate to the project directory**:
 
    ```bash
-   cd <project-name>
+   cd client
    ```
 
 3. **Install dependencies**:
